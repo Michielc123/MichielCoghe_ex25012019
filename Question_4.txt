@@ -1,0 +1,3 @@
+select gene_name, seq_region_end - seq_region_start as length from gene order by length limit 1
+
+TRDD1 gene, length 7bp

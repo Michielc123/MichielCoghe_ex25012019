@@ -1,0 +1,7 @@
+select chromosome, count(*) from gene where description like "%cancer%" group by chromosome order by count(*) desc limit 1 offset 1
+
+Chromosoom 9 met 5 genen
+
+select chromosome, count(*) from gene join transcript on gene.gene_id = transcript.gene_id join exon_transcript on transcript.transcript_id = exon_transcript.transcript_id join exon on exon_transcript.exon_id = exon.exon_id where chromosome = 9 group by chromosome
+
+Een totaal van 45679 exons

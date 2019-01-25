@@ -1,0 +1,9 @@
+curl 'https://rest.ensembl.org/lookup/symbol/zebrafish/MYCN?' -H 'Content-type:plain/text'
+
+Kijken naar chromosoom en waar de sequentie start
+
+curl 'https://rest.ensembl.org/sequence/region/zebrafish/20:33294428..33294528:1?' -H 'Content-type:text/x-fasta'
+
+>chromosome:GRCz11:20:33294428:33294528:1
+TAGAATAATACTTCACAGCCCGAAACACAGAGGCGCAGAACAGTCTTCAGTCGCCGCGGT
+AGATGTGCGACTCCAAACGGGAGGCACAGTGACTGCGATAA

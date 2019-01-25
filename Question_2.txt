@@ -1,0 +1,9 @@
+UNF
+
+projects ( Personnel number, Name, Date of birth, Lab Code, Lab name, Research Code, research descr, Research supervisor)
+
+
+
+1NF
+
+projects ( Personnel number, Name, Date of birth, Lab Code, Lab name, Research Code, research descr, Research supervisor)

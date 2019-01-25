@@ -1,0 +1,3 @@
+select gene.gene_name, count(transcript_id) from gene join transcript on gene.gene_id = transcript.gene_id group by gene.gene_name order by count(transcript_id) desc limit 1
+
+U6 gene with 1329 transcripts

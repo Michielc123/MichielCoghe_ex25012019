@@ -1,0 +1,7 @@
+select count(*) from exon --> 642590
+
+select count(*) from exon_transcript --> 1178393
+
+In de exon_transcript staat de combinatie van beide tabellen: Alle transcripts met alle exonen. 
+
+In exon enkel de exonen

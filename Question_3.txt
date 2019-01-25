@@ -1,0 +1,125 @@
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
+
+-- -----------------------------------------------------
+-- Schema mydb
+-- -----------------------------------------------------
+
+-- -----------------------------------------------------
+-- Schema mydb
+-- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS `mydb` DEFAULT CHARACTER SET utf8 ;
+-- -----------------------------------------------------
+-- Schema examen
+-- -----------------------------------------------------
+
+-- -----------------------------------------------------
+-- Schema examen
+-- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS `examen` ;
+
+USE `examen` ;
+
+-- -----------------------------------------------------
+-- Table `examen`.`Gene`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `examen`.`Gene` (
+`Gene_ID` INT NOT NULL,
+`Gene_Name` VARCHAR(80) NULL,
+`Description` TEXT NULL,
+PRIMARY KEY (`Gene_ID`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `examen`.`Position`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `examen`.`Position` (
+`Position_ID` INT NOT NULL,
+`Start` INT NULL,
+`End` INT NULL,
+`Chromosome` VARCHAR(40) NULL,
+PRIMARY KEY (`Position_ID`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `examen`.`Mutation`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `examen`.`Mutation` (
+`ID` INT NOT NULL,
+`Position` INT NOT NULL,
+`Gene` INT NOT NULL,
+PRIMARY KEY (`ID`),
+INDEX `fk_Mutation_2_idx` (`Position` ASC) VISIBLE,
+INDEX `fk_Mutation_1_idx` (`Gene` ASC) VISIBLE,
+CONSTRAINT `fk_Mutation_1`
+FOREIGN KEY (`Gene`)
+REFERENCES `examen`.`Gene` (`Gene_ID`)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION,
+CONSTRAINT `fk_Mutation_2`
+FOREIGN KEY (`Position`)
+REFERENCES `examen`.`Position` (`Position_ID`)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `examen`.`Patient_Syndrome`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `examen`.`Patient_Syndrome` (
+`Syndrome_ID` INT NOT NULL,
+`Syndrome_Name` VARCHAR(45) NOT NULL,
+`Description` TEXT NULL,
+PRIMARY KEY (`Syndrome_ID`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `examen`.`Patient`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `examen`.`Patient` (
+`Patient_ID` INT NOT NULL,
+`Patient_Name` VARCHAR(45) NOT NULL,
+`Gender` ENUM("M", "V", "X") NULL,
+`Diagnosed_Age` INT NULL,
+`Syndrome` INT NOT NULL AUTO_INCREMENT,
+PRIMARY KEY (`Patient_ID`),
+INDEX `fk_Syndrome_idx` (`Syndrome` ASC) VISIBLE,
+CONSTRAINT `fk_Syndrome`
+FOREIGN KEY (`Syndrome`)
+REFERENCES `examen`.`Patient_Syndrome` (`Syndrome_ID`)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `examen`.`Patient_Mutation`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `examen`.`Patient_Mutation` (
+`Patient_Mutation_ID` INT NOT NULL,
+`Mutation_ID` INT NOT NULL,
+`Patient_ID` INT NOT NULL,
+PRIMARY KEY (`Patient_Mutation_ID`),
+INDEX `fk_Mutation_has_Patient_Patient1_idx` (`Patient_ID` ASC) VISIBLE,
+INDEX `fk_Mutation_has_Patient_Mutation1_idx` (`Mutation_ID` ASC) VISIBLE,
+CONSTRAINT `fk_Mutation_has_Patient_Mutation1`
+FOREIGN KEY (`Mutation_ID`)
+REFERENCES `examen`.`Mutation` (`ID`)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION,
+CONSTRAINT `fk_Mutation_has_Patient_Patient1`
+FOREIGN KEY (`Patient_ID`)
+REFERENCES `examen`.`Patient` (`Patient_ID`)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;jects ( Personnel number, Name, Date of birth, Lab Code, Lab name, Research Code, research descr, Research supervisor)

@@ -1,0 +1,1 @@
+db.bioinf_mongo_examen.aggregate( { $group : { _id: "$company", average_perc : { $avg : "$percentage_of_side_effects" } } }, { $match : { average_perc : { $gt : 10 } } }, { $sort : { average_perc : -1 } } )
